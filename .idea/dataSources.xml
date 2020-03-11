@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="HSQLDB (mem)" uuid="4dda37dc-b337-4534-96a9-83ed8a6d4dc5">
+      <driver-ref>hsqldb.local</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.hsqldb.jdbc.JDBCDriver</jdbc-driver>
+      <jdbc-url>jdbc:hsqldb:mem:votingrest</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="HSQLDB (disk)" uuid="4c29419e-70c6-4386-8897-3da69f3c18e6">
+      <driver-ref>hsqldb.local</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.hsqldb.jdbc.JDBCDriver</jdbc-driver>
+      <jdbc-url>jdbc:hsqldb:file:D:\Project\Java\VotingrestDB/</jdbc-url>
+    </data-source>
+  </component>
+</project>

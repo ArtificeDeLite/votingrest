@@ -1,15 +1,19 @@
 package org.semenov.votingrest.model;
 
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.semenov.votingrest.web.HasId;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Entity
 @Table(name = "dishes")
 @Access(AccessType.FIELD)
-public class Dish {
+public class Dish implements HasId {
 
     @Id
     @SequenceGenerator(name = "global_seq", sequenceName = "global_seq", allocationSize = 1, initialValue = User.START_SEQ)
@@ -23,7 +27,7 @@ public class Dish {
 
     @Column(name = "price", nullable = false)
     @NotNull
-    private double price;
+    private int price;
 
     @Column(name = "date_time", nullable = false)
     @NotNull
@@ -31,18 +35,16 @@ public class Dish {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rest_id", nullable = false)
-    @NotNull
     private Restaurant restaurant;
 
     public Dish() {
     }
 
-    public Dish(Integer id, String description, double price, LocalDate date/*, Restaurant restaurant*/) {
+    public Dish(Integer id, String description, int price, LocalDate date) {
         this.id = id;
         this.description = description;
         this.price = price;
         this.date = date;
-/*        this.restaurant = restaurant;*/
     }
 
     public Integer getId() {
@@ -61,11 +63,11 @@ public class Dish {
         this.description = description;
     }
 
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
@@ -85,6 +87,10 @@ public class Dish {
         this.restaurant = restaurant;
     }
 
+    public boolean isNew() {
+        return this.id == null;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -96,5 +102,15 @@ public class Dish {
     @Override
     public int hashCode() {
         return id == null ? 0 : id;
+    }
+
+    @Override
+    public String toString() {
+        return "dish{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", date=" + date +
+                '}';
     }
 }

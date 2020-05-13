@@ -1,5 +1,7 @@
 package org.semenov.votingrest.model;
 
+import org.semenov.votingrest.web.HasId;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
@@ -7,7 +9,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "votes", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "date_time"}, name = "user_roles_idx")})
 @Access(AccessType.FIELD)
-public class Vote {
+public class Vote implements HasId {
 
     @Id
     @SequenceGenerator(name = "global_seq", sequenceName = "global_seq", allocationSize = 1, initialValue = User.START_SEQ)
@@ -31,11 +33,15 @@ public class Vote {
     public Vote() {
     }
 
-    public Vote(Integer id, LocalDate date/*, User user, Restaurant restaurant*/) {
+    public Vote(Integer id, LocalDate date) {
         this.id = id;
         this.date = date;
-/*        this.user = user;
-        this.restaurant = restaurant;*/
+    }
+
+    public Vote(Integer id, LocalDate date, Restaurant restaurant) {
+        this.id = id;
+        this.date = date;
+        this.restaurant = restaurant;
     }
 
     public Integer getId() {
@@ -70,6 +76,10 @@ public class Vote {
         this.restaurant = restaurant;
     }
 
+    public boolean isNew() {
+        return this.id == null;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -81,5 +91,14 @@ public class Vote {
     @Override
     public int hashCode() {
         return id == null ? 0 : id;
+    }
+
+    @Override
+    public String toString() {
+        return "Vote{" +
+                "id=" + id +
+                ", date=" + date +
+                ", restaurant=" + restaurant +
+                '}';
     }
 }

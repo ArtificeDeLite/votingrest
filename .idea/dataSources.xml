@@ -11,7 +11,7 @@
       <driver-ref>hsqldb.local</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.hsqldb.jdbc.JDBCDriver</jdbc-driver>
-      <jdbc-url>jdbc:hsqldb:file:D:\Project\Java\VotingrestDB/</jdbc-url>
+      <jdbc-url>jdbc:hsqldb:file:D:\Project\Java/VotingrestDB</jdbc-url>
     </data-source>
   </component>
 </project>
